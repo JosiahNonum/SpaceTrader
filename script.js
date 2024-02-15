@@ -24,7 +24,7 @@ function addMessage(message, title) {
         }
       }
     } else {
-      console.error("Invalid data format");
+      console.error("Invalid data format", data);
     }
   }
 
@@ -54,6 +54,18 @@ function emptyMessages() {
   }
 }
 
+function emptyButtons() {
+  var messagesContainer = document.getElementById("buttonDisplay");
+
+  // Check if the element exists before trying to manipulate it
+  if (messagesContainer) {
+    // Empty the content of the element
+    messagesContainer.innerHTML = "";
+  } else {
+    console.error('Element with id "buttonDisplay" not found.');
+  }
+}
+
 function initialToken(token) {
   tokenValue = "Bearer " + token;
   //console.log(tokenValue);
@@ -65,7 +77,7 @@ function setToken() {
 
   tokenValue = "Bearer " + tokenValue;
 
-  console.log(tokenValue);
+  //console.log(tokenValue);
 }
 
 function serverStatus() {
@@ -142,7 +154,7 @@ function displayContracts() {
 }
 
 function acceptContract() {
-  let contractID = document.getElementById("contractID").value;
+  let contractID = document.getElementById("Accept Contract").value;
   const options = {
     method: "POST",
     headers: {
@@ -156,7 +168,10 @@ function acceptContract() {
     options
   )
     .then((response) => response.json())
-    .then((response) => console.log(response))
+    .then((response) => {
+      console.log(response); // Check the data received from the API
+      addMessage(response, "Accept Contract");
+    })
     .catch((err) => console.error(err));
 }
 
@@ -178,8 +193,32 @@ function addButton(title, functionToCall) {
   $("#buttonDisplay").append(button);
 }
 
+function addForm(title, functionToCall) {
+  $("#buttonDisplay").append("<br>");
+
+  let button = document.createElement("button");
+  button.innerText = title;
+  button.onclick = functionToCall;
+  button.classList.add("button");
+  $("#buttonDisplay").append(button);
+
+  let input = document.createElement("input");
+  input.id = title;
+  input.placeholder = title;
+  input.classList.add("form-control");
+  $("#buttonDisplay").append(input);
+}
+
+function switchToContracts() {
+  emptyButtons();
+  addButton("Back", initialButtons);
+  addButton("Display Contracts", displayContracts);
+  addForm("Accept Contract", acceptContract);
+}
+
 function initialButtons() {
+  emptyButtons();
   addButton("Server Status", serverStatus);
   addButton("Display Agent", displayAgent);
-  addButton("Display Contracts", displayContracts);
+  addButton("Contracts", switchToContracts);
 }
