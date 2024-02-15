@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceTrader -- jdl</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <h1>SpaceTrader</h1>
+    <h2>Set Token</h2>
+    <div class="myToken">
+        <input id="token" class="form-control" placeholder="token">
+        <button class="button" id="setToken" onclick="setToken()">Set Token</button>
+    </div>
+
+
+    <div class="myAgent">
+        <h2>My Agent</h2>
+        <button class="button" id="setAgent" onclick="displayAgent()">Display Agent Info</button>
+    <br>
+
+    <div class="myContracts">
+        <h2>My Contracts</h2>
+        <button class="button" id="setContracts" onclick="displayContracts()">Display Contracts</button>
+    </div>
+
+
+
+
+    <div class="container">
+        <br>
+        <div class="jumbotron" style="background-color: #f8f9fa">
+            <h2>Messages:</h2>
+        </div>
+    <div id="messages">
+
+
+    <script src="script.js"></script>
+</body>
+</html>
