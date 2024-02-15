@@ -16,6 +16,11 @@
         <button class="button" id="setToken" onclick="setToken()">Set Token</button>
     </div>
 
+    <div>
+        <h2>server status</h2>
+        <button class="button" id="serverStatus" onclick="serverStatus()">Display Server Info</button>
+    <br>
+
 
     <div class="myAgent">
         <h2>My Agent</h2>
@@ -27,8 +32,12 @@
         <button class="button" id="setContracts" onclick="displayContracts()">Display Contracts</button>
     </div>
 
-
-
+    <div class="contractID">
+        <h2>Accept Contract</h2>
+        <input id="contractID" class="form-control" placeholder="contract id"></textarea>
+        <br>
+        <button class="button" id="acceptContract" onclick="acceptContract()">Accept Contract</button>
+    </div>
 
     <div class="container">
         <br>
@@ -36,6 +45,8 @@
             <h2>Messages:</h2>
         </div>
     <div id="messages">
+
+    <div id="jsonContainer" class="jsonContainer"></div>
 
 
     <script src="script.js"></script>
