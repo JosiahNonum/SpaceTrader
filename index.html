@@ -6,6 +6,9 @@
     <title>SpaceTrader -- jdl</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="token.js"></script>
+
 </head>
 <body>
 
@@ -16,7 +19,13 @@
         <button class="button" id="setToken" onclick="setToken()">Set Token</button>
     </div>
 
-    <div>
+
+    <div class="buttonDisplay" id="buttonDisplay">
+
+    </div>
+
+
+    <!-- <div>
         <h2>server status</h2>
         <button class="button" id="serverStatus" onclick="serverStatus()">Display Server Info</button>
     <br>
@@ -37,7 +46,7 @@
         <input id="contractID" class="form-control" placeholder="contract id"></textarea>
         <br>
         <button class="button" id="acceptContract" onclick="acceptContract()">Accept Contract</button>
-    </div>
+    </div> -->
 
     <div class="container">
         <br>
@@ -49,6 +58,12 @@
     <div id="jsonContainer" class="jsonContainer"></div>
 
 
-    <script src="script.js"></script>
+
+
+    <script>
+        initialToken(token)
+        initialButtons()
+      </script>
+
 </body>
 </html>

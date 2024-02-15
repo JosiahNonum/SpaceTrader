@@ -1,4 +1,4 @@
-var tokenValue = "";
+let tokenValue = "";
 
 function addMessage(message, title) {
   console.log("Message: " + message);
@@ -52,6 +52,11 @@ function emptyMessages() {
   } else {
     console.error('Element with id "messages" not found.');
   }
+}
+
+function initialToken(token) {
+  tokenValue = "Bearer " + token;
+  //console.log(tokenValue);
 }
 
 function setToken() {
@@ -130,8 +135,8 @@ function displayContracts() {
   fetch("https://api.spacetraders.io/v2/my/contracts", options)
     .then((response) => response.json())
     .then((data) => {
-      addMessage(data, "Contracts Information");
-      console.log(data); // Check the data received from the API
+      addMessage(data.data, "Contracts Information");
+      console.log(data.data); // Check the data received from the API
     })
     .catch((err) => console.error(err));
 }
@@ -153,4 +158,28 @@ function acceptContract() {
     .then((response) => response.json())
     .then((response) => console.log(response))
     .catch((err) => console.error(err));
+}
+
+/***
+ *
+ *
+ * This is the breakpoint
+ *
+ *
+ *
+ *
+ */
+
+function addButton(title, functionToCall) {
+  let button = document.createElement("button");
+  button.innerText = title;
+  button.onclick = functionToCall;
+  button.classList.add("button");
+  $("#buttonDisplay").append(button);
+}
+
+function initialButtons() {
+  addButton("Server Status", serverStatus);
+  addButton("Display Agent", displayAgent);
+  addButton("Display Contracts", displayContracts);
 }
