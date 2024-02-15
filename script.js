@@ -1,24 +1,5 @@
 var tokenValue = "";
 
-// function addMessage(message, title) {
-//   // displaying the title of the message
-//   $("#messages").append(`<h2>${title}</h2>`);
-
-//   // Check if message.data is an object
-//   if (message.data && typeof message.data === "object") {
-//     // Iterate through the properties of the data object using for...in loop
-//     for (const key in message.data) {
-//       if (message.data.hasOwnProperty(key)) {
-//         // Construct the HTML output dynamically
-//         const htmlOutput = `<p>${key}: ${message.data[key]}</p>`;
-//         // Append the HTML to the #messages element
-//         $("#messages").append(htmlOutput);
-//       }
-//     }
-//   } else {
-//     console.error("Invalid message format");
-//   }
-// }
 function addMessage(message, title) {
   // displaying the title of the message
   $("#messages").append(`<h2>${title}</h2>`);
