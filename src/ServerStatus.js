@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { replace } from "./DomManip";
 
 function ServerStatus() {
   const [data, setData] = useState(null);
@@ -11,6 +12,7 @@ function ServerStatus() {
       })
       .then((jsonData) => {
         setData(jsonData); // update state with JSON data
+        replace("Server Status", data);
       })
       .catch((error) => {
         setError(error.message); // handle error
@@ -19,9 +21,8 @@ function ServerStatus() {
 
   return (
     <div>
+      <h2>Server Status</h2>
       <button onClick={() => getServerStatus()}>Get Server Status</button>
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-      {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
     </div>
   );
 }

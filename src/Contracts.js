@@ -1,23 +1,10 @@
 import React, { useState } from "react";
 import { token } from "./token";
-import { replace } from "./DomManip";
 import { Home, Clear } from "./View";
+import { replace } from "./DomManip";
 
-async function ListAgents() {
-  const url = "https://api.spacetraders.io/v2/agents";
-  const options = { method: "GET", headers: { Accept: "application/json" } };
-
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    replace("Agent Status", data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function GetAgentBySymbol() {
-  const [agentSymbol, setAgentSymbol] = useState("");
+function GetContractByID() {
+  const [contractID, setContractID] = useState("");
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -28,31 +15,31 @@ function GetAgentBySymbol() {
     },
   };
 
-  function getAgent() {
-    console.log("agentSymbol", setAgentSymbol);
-    //const agentSymbol = agentSymbol;
+  function getContract() {
+    console.log("contractID", contractID);
+    const contractId = contractID;
 
-    fetch(`https://api.spacetraders.io/v2/agents/${agentSymbol}`, options)
+    fetch(`https://api.spacetraders.io/v2/my/contracts/${contractId}`, options)
       .then((response) => response.json())
       .then((data) => setData(data))
-      .then(() => replace("Public Agent", data))
+      .then(() => replace("Contract Status", data))
       .catch((error) => setError(error.message));
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    getAgent();
+    getContract();
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <label>
-          Get Agent by ID:
+          Get Contract by ID:
           <input
             type="text"
-            value={agentSymbol}
-            onChange={(e) => setAgentSymbol(e.target.value)}
+            value={contractID}
+            onChange={(e) => setContractID(e.target.value)}
           />
         </label>
         <input type="submit" />
@@ -61,22 +48,22 @@ function GetAgentBySymbol() {
   );
 }
 
-function DisplayAgent() {
+function Contract() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  const options = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  };
+  function getContract() {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    };
 
-  function getAgent() {
-    fetch("https://api.spacetraders.io/v2/my/agent", options)
+    fetch("https://api.spacetraders.io/v2/my/contracts", options)
       .then((response) => response.json())
       .then((data) => setData(data))
-      .then(() => replace("Agent Status", data))
+      .then(() => replace("Contract Status", data))
       .catch((error) => setError(error.message));
   }
 
@@ -86,18 +73,18 @@ function DisplayAgent() {
       <div className="left-side">
         <h1>My Contracts</h1> <Clear />
         <Home />
-        <button onClick={() => getAgent()}>Get Agent Status</button>
-        <button onClick={() => ListAgents()}>List Agents:</button>
-        <GetAgentBySymbol />
+        <button onClick={() => getContract()}>Get Contract Status</button>
+        <GetContractByID />
       </div>
       {/* Right side for messages */}
       <div className="right-side">
         <h2>Messages</h2>
         <div id="messages"></div>
+
         {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       </div>
     </div>
   );
 }
 
-export default DisplayAgent;
+export default Contract;
